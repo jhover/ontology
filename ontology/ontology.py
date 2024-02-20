@@ -192,10 +192,11 @@ def make_hotmatrix(obofile, gaffile, outfile, config=None, usecache=False):
         if outfile.endswith(".csv"):
             logging.debug(f"Saving CSV matrix to {outfile}")       
             df.to_csv(outfile, index=True, header=True, sep=',')
-       
+            logging.info('Done')
         elif outfile.endswith(".tsv"):
             logging.debug(f"Saving TSV matrix to {outfile}")     
             df.to_csv(outfile, index=True, header=True, sep='\t')
+            logging.info('Done')
     else:
         logging.debug("no output required. Just returning df.")    
     return df
@@ -223,11 +224,11 @@ def build_gomatrix(config, usecache=False, gaffile=None):
 
     logging.debug("Converting back to dense matrix....")
     genebygo = genebygo.todense()    
-    logging.info(f"Done. genebygo: t{type(genebygo)} shape {genebygo.shape} dtype {genebygo.dtype} ")
+    logging.info(f"genebygo: t{type(genebygo)} shape {genebygo.shape} dtype {genebygo.dtype} ")
     genebygo = genebygo.astype('uint8')
-    logging.info(f"Done. genebygo: dtype {genebygo.dtype} ")               
+    logging.info(f"genebygo: dtype {genebygo.dtype} ")               
     df = pd.DataFrame(genebygo, dtype='uint8', index=genelist, columns=ontobj.gotermlist)
-    logging.debug("Done.")       
+    logging.debug("Dataframe made.")       
     return df
 
 
