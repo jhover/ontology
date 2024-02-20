@@ -683,10 +683,10 @@ class GeneOntology(object):
         self.cachedir = os.path.expanduser(self.config.get('global' ,'cachedir'))
         self.cachefile = "%s.csv" % self.lkname
         self.cachepath = "%s/%s" % (self.cachedir, self.cachefile)
-        self.obofile = os.path.expanduser(obofile)
         if obofile is None:
             self.obofile = os.path.expanduser(self.config.get('ontology','obofile'))
-        
+        else:
+            self.obofile = os.path.expanduser(obofile)
         self.goidx = {}   #  { 'GO:XXXXXX' : GoTermObject, }      
         self.df = None
         self.get_tree_termindex()
